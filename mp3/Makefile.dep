@@ -1,0 +1,28 @@
+boot.o: boot.S multiboot.h x86_desc.h types.h
+interrupt_linkage.o: interrupt_linkage.S
+syscall_linkage.o: syscall_linkage.S
+x86_desc.o: x86_desc.S x86_desc.h types.h
+file_system_driver.o: file_system_driver.c file_system_driver.h types.h \
+  lib.h syscall.h rtc.h terminal.h i8259.h paging.h x86_desc.h \
+  interrupt_handlers.h scheduling.h
+i8259.o: i8259.c i8259.h types.h lib.h
+idt_exception.o: idt_exception.c lib.h types.h idt_exception.h
+interrupt_handlers.o: interrupt_handlers.c interrupt_handlers.h i8259.h \
+  types.h lib.h rtc.h terminal.h file_system_driver.h syscall.h paging.h \
+  x86_desc.h scheduling.h
+kernel.o: kernel.c multiboot.h types.h x86_desc.h lib.h i8259.h debug.h \
+  idt_exception.h syscall_linkage.h paging.h interrupt_linkage.h \
+  interrupt_handlers.h rtc.h terminal.h file_system_driver.h syscall.h \
+  scheduling.h
+lib.o: lib.c lib.h types.h terminal.h i8259.h
+paging.o: paging.c paging.h types.h
+rtc.o: rtc.c i8259.h types.h lib.h rtc.h
+scheduling.o: scheduling.c scheduling.h syscall.h lib.h types.h rtc.h \
+  terminal.h i8259.h file_system_driver.h paging.h x86_desc.h \
+  interrupt_handlers.h
+syscall.o: syscall.c syscall.h lib.h types.h rtc.h terminal.h i8259.h \
+  file_system_driver.h paging.h x86_desc.h interrupt_handlers.h \
+  scheduling.h
+terminal.o: terminal.c terminal.h lib.h types.h i8259.h \
+  interrupt_handlers.h rtc.h file_system_driver.h syscall.h paging.h \
+  x86_desc.h scheduling.h
